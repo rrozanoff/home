@@ -1,0 +1,6 @@
+---
+
+my_timezone: Europe/Moscow
+common_packages: [git, mc, iptables, vim, htop, tree, sysstat, tcpdump, rsync, telnet, python3-pip, mdadm, jq, samba, samba-common-bin, smbclient, cifs-utils, iotop]
+
+pip_packages: [six, docker-py]

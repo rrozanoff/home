@@ -1,0 +1,5 @@
+users:
+- groups: admin
+  name: rrozanoff
+  ssh_pub: []
+  uid: 45691

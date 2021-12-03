@@ -1,0 +1,30 @@
+---
+
+- hosts: pi
+  become: true
+#  become_user: root
+  
+  roles:
+    - name: common
+      tags: common
+
+    - name: openvpn
+      tags: openvpn
+
+    - name: users
+      tags: users
+
+    - name: docker-pi
+      tags: docker-pi
+
+    - name: node_exporter
+      tags: node_exporter
+
+#    - name: prometheus
+#      tags: prometheus
+
+#    - name: grafana
+#      tags: grafana
+
+#    - name: psql1c
+#      tags: psql1c

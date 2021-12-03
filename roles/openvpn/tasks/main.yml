@@ -1,0 +1,62 @@
+---
+
+- name: Check if openvpn installed
+  apt: 
+    name: openvpn
+    state: present
+  register: output
+
+- name: Add openvpn server config
+  copy:
+    src: server.conf
+    dest: /etc/openvpn/server.conf
+    mode: 0755
+
+- name: Add openvpn extras
+  copy:
+    src: "{{ item }}"
+    dest: /etc/openvpn/server/
+    mode: 0777
+  with_items:
+    - ipp.txt
+    - client-template.txt
+    - add-openvpn-rules.sh
+
+- name: Create directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+  with_items:
+    - /var/log/openvpn
+    - /etc/openvpn/ccd
+
+- name: ensure log file exists
+  copy:
+    content: ""
+    dest: /var/log/openvpn/status.log
+    force: no
+    mode: 0755
+
+- name: Add openvpn server crypto
+  copy:
+    src: "{{ item }}"
+    dest: /etc/openvpn/server/
+    mode: 0600
+  with_items:
+    - ca.crt
+    - ca.key
+    - crl.pem
+    - tls-crypt.key
+    - server.crt
+    - server.key
+
+- name: openvpn IPtables
+  shell: sysctl -w net.ipv4.ip_forward=1 | /etc/openvpn/server/add-openvpn-rules.sh
+   
+
+- name: Enable openvpn
+  service:
+    name: openvpn@server
+    state: started
+    enabled: true

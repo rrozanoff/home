@@ -1,0 +1,7 @@
+prometheus_version: v2.18.1
+#grafana_version: 6.7.3
+#plex_version: amd64-latest #for rpi - arm32v7-latest
+ha_version: 2021.9.6
+mtproxy_version: 1.4
+nginx_version: stable
+node_exporter_version: v1.0.1

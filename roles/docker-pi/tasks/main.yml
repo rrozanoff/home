@@ -1,0 +1,15 @@
+---
+
+- name: Install docker on Raspberry
+  block:
+    - get_url:
+        url: https://get.docker.com
+        dest: /tmp/get_docker.sh
+        mode: 0744
+    - command: "sh /tmp/get_docker.sh"
+
+- name: Enable docker
+  service:
+    name: docker
+    state: started
+    enabled: true
